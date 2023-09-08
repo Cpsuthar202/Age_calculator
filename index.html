@@ -1,0 +1,101 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Age calculator app</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="container">
+      <form onsubmit="event.preventDefault();">
+        <div class="form_container">
+          <div class="block">
+            <label for="day">Day</label>
+            <input type="number" placeholder="DD" id="day" min="1" max="2" required>
+          </div>
+          <div class="block">
+            <label for="month">Month</label>
+            <input type="number" placeholder="MM" id="month"min="1" max="2" required>
+          </div>
+          <div class="block">
+            <label for="year">Year</label>
+            <input type="number" placeholder="YYYY" id="year"min="1" max="4" required>
+          </div>
+        </div>
+        <div class="submit_block">
+          <hr>
+          <button type="submit" class="sumbit_btn"><img src="assets/images/icon-arrow.svg" alt="icon" id="sub"></button>
+        </div>
+      </form>
+      <div class="output">
+        <h1><span id="yy">--</span> years</h1>
+        <h1><span id="mm">--</span> months</h1>
+        <h1><span id="dd">--</span> days</h1>
+      </div>
+    </div>
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Chandra Prakash Suthar</a>.
+  </div>
+  <script>
+    // user input date 
+    let disday = document.querySelector("#dd")
+    let dismonth = document.querySelector("#mm")
+    let disyear = document.querySelector("#yy")
+    let sub = document.getElementById("sub");
+
+    sub.addEventListener("click", () => {
+      let dobday = document.querySelector("#day").value
+      let dobmonth = document.querySelector("#month").value
+      let dobyear = document.querySelector("#year").value
+      // currentDate
+      var currentDate = new Date();
+      var currentDay = currentDate.getDate();
+      var currentMonth = currentDate.getMonth() + 1;
+      var currentYear = currentDate.getFullYear();
+      // bay
+      if (dobday > currentDay) {
+        let cday = currentDay + 31;
+        let day = cday - dobday;
+        disday.innerHTML = day;
+        currentMonth -= 1;
+      } else {
+        let day = currentDay - dobday;
+        disday.innerHTML = day;
+      }
+      // month
+      if (dobmonth > currentMonth) {
+        let cmonth = currentMonth + 12;
+        let month = cmonth - dobmonth;
+        dismonth.innerHTML = month;
+        currentYear -= 1;
+      } else {
+        let month = currentMonth - dobmonth;
+        dismonth.innerHTML = month;
+      }
+      // year
+      disyear.innerHTML = currentYear - dobyear;
+    });
+  </script>
+</body>
+
+</html>
